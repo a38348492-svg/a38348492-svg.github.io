@@ -218,7 +218,8 @@
       }
 
       function drawSciFiSkeleton(hand, gx, gy) {
-        stroke(red(mainColor), green(mainColor), blue(mainColor), 80);
+        stroke(57, 255, 20, 180); // 設定為螢光綠 (Fluorescent Green)
+        strokeWeight(2);          // 稍微加粗讓螢光線條更明顯
         let connections = handPose.getConnections();
         for (let i = 0; i < connections.length; i++) {
           let a = connections[i][0], b = connections[i][1];
