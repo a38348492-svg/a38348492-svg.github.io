@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>維思維 WeisWay - 探索心理學與生活的奇妙世界</title>
+    <!-- 使用 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 使用 FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb', // Blue 600
+                        secondary: '#0ea5e9', // Sky 500
+                        dark: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-secondary selection:text-white">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 glass-card shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">W</div>
+                    <span class="font-bold text-xl tracking-wider text-dark">維思維 <span class="text-primary font-black">WeisWay</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-primary font-medium transition">首頁</a>
+                    <a href="#library" class="text-slate-600 hover:text-primary font-medium transition">精選知識庫</a>
+                    <a href="#faq" class="text-slate-600 hover:text-primary font-medium transition">關於阿維 & FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主視覺區 -->
+    <section id="home" class="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 min-h-[80vh] justify-center">
+        <div class="flex-1 text-center md:text-left">
+            <div class="inline-block px-4 py-1.5 bg-blue-100 text-primary rounded-full font-semibold text-sm mb-6 animate-pulse">
+                <i class="fa-solid fa-brain mr-2"></i>用科學與心理學，看透生活大小事
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-dark leading-tight mb-6">
+                Hi 大家好，我是阿維！<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">了解你的大腦，<br>改變你的人生。</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto md:mx-0 leading-relaxed">
+                你是不是也曾好奇，為什麼我們總是忍不住拖延？為什麼鏡子裡的你比照片好看？
+                這裡把艱澀的心理學實驗與科學知識，化作你生活中最實用的智慧。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#library" class="px-8 py-4 bg-primary text-white rounded-full font-bold shadow-lg hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                    探索知識庫
+                </a>
+                <button onclick="showRandomFact()" class="px-8 py-4 bg-white text-primary border-2 border-primary rounded-full font-bold shadow hover:bg-blue-50 transition-all duration-300 text-center">
+                    <i class="fa-solid fa-lightbulb text-yellow-400 mr-2"></i>抽個心理冷知識
+                </button>
+            </div>
+        </div>
+        <div class="flex-1 w-full max-w-md relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-blue-200 to-sky-100 rounded-[3rem] transform rotate-3 scale-105 z-0"></div>
+            <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Psychology and Brain" class="relative z-10 rounded-[3rem] shadow-2xl object-cover h-[400px] w-full border-4 border-white">
+            
+            <!-- 浮動小卡片 -->
+            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-500 font-bold">最新研究</p>
+                    <p class="text-sm font-bold text-dark">大腦具有可塑性！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知識庫與搜尋區 -->
+    <section id="library" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-dark mb-4">維思維專屬資源庫</h2>
+                <p class="text-slate-500">從拖延症到人際關係，找尋你需要的解答。</p>
+            </div>
+
+            <!-- 搜尋與篩選工具列 -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+                <!-- 搜尋框 -->
+                <div class="relative w-full md:w-96 group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-search text-slate-400 group-focus-within:text-primary transition-colors"></i>
+                    </div>
+                    <input type="text" id="searchInput" placeholder="搜尋關鍵字 (例：拖延, 蛤蟆, 戀愛...)" 
+                        class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all shadow-sm">
+                </div>
+
+                <!-- 分類標籤 -->
+                <div class="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar pb-2 md:pb-0" id="categoryFilters">
+                    <button class="filter-btn active px-6 py-2 rounded-full font-medium text-sm transition-all bg-dark text-white shadow-md" data-category="all">全部</button>
+                    <button class="filter-btn px-6 py-2 rounded-full font-medium text-sm transition-all bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="心理學">心理學</button>
+                    <button class="filter-btn px-6 py-2 rounded-full font-medium text-sm transition-all bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="自我成長">自我成長</button>
+                    <button class="filter-btn px-6 py-2 rounded-full font-medium text-sm transition-all bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="生活知識">生活知識</button>
+                </div>
+            </div>
+
+            <!-- 卡片網格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cardsContainer">
+                <!-- 卡片會由 JS 動態生成 -->
+            </div>
+
+            <!-- 無結果提示 -->
+            <div id="noResults" class="hidden text-center py-12">
+                <i class="fa-solid fa-ghost text-6xl text-slate-300 mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-600">找不到相關內容</h3>
+                <p class="text-slate-500">換個關鍵字試試看吧！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ / 關於區塊 -->
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-dark mb-4">關於阿維與常見問題 (FAQ)</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ 1 -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100 hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-dark mb-3 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-question text-primary"></i>
+                        維思維 WeisWay 的頻道宗旨是什麼？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        我們希望能用最淺顯易懂的動畫與解說，把艱澀的心理學、科學實驗與生活知識帶給大家。了解人性的心理機制，不僅能解開日常的疑惑（像是為什麼會起雞皮疙瘩、為什麼會拖延），更能幫助我們跳脫負面迴圈，改變大腦與人生。
+                    </p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100 hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-dark mb-3 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-question text-primary"></i>
+                        為什麼我明明知道該做事，卻總是拖延？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        心理學家研究指出，拖延的根本原因**不是懶惰，也不是時間管理問題，而是「情緒」**。當任務讓你感到焦慮、無聊或挫敗時，大腦為了逃避這些負面情緒，就會啟動拖延機制，讓你去滑手機尋找短期多巴胺。
+                    </p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100 hover:shadow-md transition">
+                    <h3 class="text-xl font-bold text-dark mb-3 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-question text-primary"></i>
+                        影片裡常提到的 MBTI 是算命或星座嗎？
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        完全不是！真正的 MBTI 是一套性格分類指標，源自榮格的心理學理論。它探討的是人們在獲取資訊與做決策時的「主導歷程」與「輔助歷程」，幫助我們更好地認識自己的認知習慣，而不是單純的貼標籤。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-dark text-slate-400 py-12 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-2xl font-bold text-white mb-4">維思維 WeisWay</div>
+            <p class="mb-6">用科學看透生活，用心理學改變人生。</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+            <p class="text-sm">© 2026 維思維 WeisWay. 此網站為概念展示專案。</p>
+            <p class="text-sm mt-2 text-slate-500">製作人：B11208013 史靖崴</p>
+        </div>
+    </footer>
+
+    <!-- 冷知識彈窗 (Modal) -->
+    <div id="factModal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4">
+        <!-- 背景遮罩 -->
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeFactModal()"></div>
+        <!-- 彈窗內容 -->
+        <div class="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="factModalContent">
+            <button onclick="closeFactModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-yellow-100 text-yellow-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-lightbulb animate-pulse"></i>
+                </div>
+                <h3 class="text-2xl font-black text-dark">阿維冷知識時間</h3>
+            </div>
+            <p id="factText" class="text-lg text-slate-700 leading-relaxed text-center font-medium mb-8">
+                載入中...
+            </p>
+            <button onclick="closeFactModal()" class="w-full py-3 bg-primary text-white rounded-xl font-bold hover:bg-blue-700 transition">
+                原來如此！學到了
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // 知識庫資料 (基於維思維影片內容)
+        const knowledgeData = [
+            {
+                title: "拖延症的真正原因",
+                category: "自我成長",
+                desc: "拖延不是懶惰，也不是時間管理有問題！它是大腦為了逃避負面情緒啟動的開關。教你利用「2分鐘法則」騙過大腦。",
+                icon: "fa-stopwatch",
+                color: "text-orange-500",
+                bg: "bg-orange-100"
+            },
+            {
+                title: "大腦具有可塑性",
+                category: "自我成長",
+                desc: "別再說自己『定型』了！至今最強的大腦研究指出，你昨天的所思所想，正悄悄地改變你的大腦神經迴路。",
+                icon: "fa-brain",
+                color: "text-primary",
+                bg: "bg-blue-100"
+            },
+            {
+                title: "真正的 MBTI 心理學",
+                category: "心理學",
+                desc: "MBTI 不是用來貼標籤的算命工具！了解你性格的『主導歷程』與『輔助歷程』，你會發現人其實會隨著成長改變。",
+                icon: "fa-puzzle-piece",
+                color: "text-purple-500",
+                bg: "bg-purple-100"
+            },
+            {
+                title: "什麼是倖存者偏差？",
+                category: "心理學",
+                desc: "為什麼飛機中彈最多的地方不需要加強防護？不懂反向思考，你很容易陷入邏輯謬誤的『愚者思維』中。",
+                icon: "fa-fighter-jet",
+                color: "text-red-500",
+                bg: "bg-red-100"
+            },
+            {
+                title: "蛤蟆先生看心理師",
+                category: "心理學",
+                desc: "你痛苦的真正原因？深入解析『兒童、父母、成人』自我狀態，以及什麼是讓你深陷其中的『自證預言』。",
+                icon: "fa-couch",
+                color: "text-green-600",
+                bg: "bg-green-100"
+            },
+            {
+                title: "聽音樂為何起雞皮疙瘩",
+                category: "生活知識",
+                desc: "這被稱為『皮膚高潮』！當音樂的節奏與預期產生落差時，交感神經會刺激腎上腺素分泌，導致豎毛肌收縮。",
+                icon: "fa-music",
+                color: "text-pink-500",
+                bg: "bg-pink-100"
+            },
+            {
+                title: "鏡子裡的你比照片好看？",
+                category: "生活知識",
+                desc: "『重複曝光效應』與『凍臉效應』！人習慣看動態的、且左右顛倒的自己，所以看到靜態照片反而會覺得陌生、不好看。",
+                icon: "fa-user-astronaut",
+                color: "text-teal-500",
+                bg: "bg-teal-100"
+            },
+            {
+                title: "為什麼公車到站會自動醒？",
+                category: "生活知識",
+                desc: "人體內建『生物鐘』，加上睡眠時大腦其實還在活躍，潛意識的暗示與對報站廣播的選擇性關注，會自動喚醒你。",
+                icon: "fa-bus",
+                color: "text-yellow-600",
+                bg: "bg-yellow-100"
+            },
+            {
+                title: "墜入愛河的36道問題",
+                category: "心理學",
+                desc: "心理學家 Arthur Aron 的實驗：透過循序漸進的自我揭露（Self-disclosure），兩個陌生人也能迅速產生親密感！",
+                icon: "fa-heart",
+                color: "text-rose-500",
+                bg: "bg-rose-100"
+            }
+        ];
+
+        // 冷知識庫
+        const randomFacts = [
+            "你知道嗎？錄音裡的聲音之所以覺得難聽（鴨子音），是因為你平時聽到的自己的聲音，還包含了『骨傳導』產生的低沉厚實感！",
+            "心理學中的『倖存者偏差』告訴我們：我們常常只看到成功者的經驗，卻忽略了那些失敗者根本沒有機會說話。",
+            "大腦其實分不清『想像』與『現實』。海豹部隊會利用『視覺化』的心理訓練，讓大腦以為你已經經歷過逆境，從而降低壓力。",
+            "人之所以會同時愛上兩個人，有時是一種心理防禦機制：既想要新的刺激，又不想失去原本的習慣與安全感。",
+            "減少老化的一個秘訣是讓細胞處於『逆境』。適當的高強度運動能激活細胞的保護機制，促進DNA修復！"
+        ];
+
+        // 渲染卡片
+        const cardsContainer = document.getElementById('cardsContainer');
+        const noResults = document.getElementById('noResults');
+
+        function renderCards(data) {
+            cardsContainer.innerHTML = '';
+            if (data.length === 0) {
+                cardsContainer.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            cardsContainer.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            data.forEach((item, index) => {
+                const delay = index * 100; // 階梯式動畫延遲
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 opacity-0 transform translate-y-4 group cursor-pointer`;
+                // 使用 setTimeout 來觸發進入動畫
+                setTimeout(() => {
+                    card.classList.remove('opacity-0', 'translate-y-4');
+                }, 50 + delay);
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 ${item.bg} ${item.color} rounded-xl flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-500 rounded-full">${item.category}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2 group-hover:text-primary transition-colors">${item.title}</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">${item.desc}</p>
+                    <div class="mt-4 flex items-center text-primary text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity transform -translate-x-2 group-hover:translate-x-0">
+                        觀看解說 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        // 初始化渲染
+        renderCards(knowledgeData);
+
+        // 搜尋功能
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+            
+            const filteredData = knowledgeData.filter(item => {
+                const matchSearch = item.title.toLowerCase().includes(term) || item.desc.toLowerCase().includes(term);
+                const matchCategory = activeCategory === 'all' || item.category === activeCategory;
+                return matchSearch && matchCategory;
+            });
+            
+            renderCards(filteredData);
+        });
+
+        // 分類篩選功能
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // 更新按鈕樣式
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-dark', 'text-white', 'shadow-md');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                const clickedBtn = e.target;
+                clickedBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                clickedBtn.classList.add('active', 'bg-dark', 'text-white', 'shadow-md');
+
+                // 執行篩選
+                const category = clickedBtn.dataset.category;
+                const term = searchInput.value.toLowerCase();
+                
+                const filteredData = knowledgeData.filter(item => {
+                    const matchCategory = category === 'all' || item.category === category;
+                    const matchSearch = item.title.toLowerCase().includes(term) || item.desc.toLowerCase().includes(term);
+                    return matchCategory && matchSearch;
+                });
+
+                renderCards(filteredData);
+            });
+        });
+
+        // 導覽列滾動效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+
+        // 隨機冷知識彈窗邏輯
+        const modal = document.getElementById('factModal');
+        const modalContent = document.getElementById('factModalContent');
+        const factText = document.getElementById('factText');
+
+        function showRandomFact() {
+            const randomIdx = Math.floor(Math.random() * randomFacts.length);
+            factText.innerHTML = randomFacts[randomIdx];
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // 小延遲讓 CSS 動畫生效
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeFactModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300); // 等待縮放動畫結束
+        }
+    </script>
+</body>
+</html>
